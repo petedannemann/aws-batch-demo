@@ -158,9 +158,10 @@ resource "aws_batch_compute_environment" "this" {
 
   compute_resources {
     instance_role = "${aws_iam_instance_profile.ecs_instance_role.arn}"
+    ec2_key_pair = "MyEC2KeyPair"
 
     instance_type = [
-      "c4.large",
+      "optimal",
     ]
 
     max_vcpus = 2
@@ -194,14 +195,36 @@ resource "aws_batch_job_queue" "this" {
   compute_environments = ["${aws_batch_compute_environment.this.arn}"]
 }
 
-resource "aws_batch_job_definition" "this" {
+resource "aws_batch_job_definition" "decompress" {
   name = "${var.name}"
   type = "container"
 
   container_properties = <<CONTAINER_PROPERTIES
 {
     "command": [
+        "decompress-decrypt",
         "decompress", 
+        "--input-file-path",
+        "s3://${aws_s3_bucket.this.bucket}/${var.input_file}",
+        "--output-file-path",
+        "s3://${aws_s3_bucket.this.bucket}/${var.output_file}"
+    ],
+    "image": "${data.aws_caller_identity.current.account_id}.dkr.ecr.us-east-1.amazonaws.com/${aws_ecr_repository.this.name}:latest",
+    "memory": 1024,
+    "vcpus": 1
+}
+CONTAINER_PROPERTIES
+}
+
+resource "aws_batch_job_definition" "decrypt" {
+  name = "${var.name}"
+  type = "container"
+
+  container_properties = <<CONTAINER_PROPERTIES
+{
+    "command": [
+        "decompress-decrypt",
+        "decrypt", 
         "--input-file-path",
         "s3://${aws_s3_bucket.this.bucket}/${var.input_file}",
         "--output-file-path",
