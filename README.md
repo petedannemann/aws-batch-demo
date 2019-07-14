@@ -11,7 +11,7 @@ This provisions an AWS Batch Compute Environment and Job Definition and runs a s
 ## Python CLI Installation
 
 ```bash
-$ pip install git+https://github.com/petedannemann/aws-secrets-manager-cli#egg=aws_secrets_manager_cli
+$ pip install git+https://github.com/petedannemann/aws-batch-demo#egg=decompress-decrypt
 ```
 
 ## Python CLI Usage
