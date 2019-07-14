@@ -1,0 +1,4 @@
+input_file_path: s3://aws-batch-example/foo.txt.gz
+output_file_path: s3://aws-batch-example/foo.txt
+schedule_interval: false
+encryption_key: LkMx-C8HGTnCZnmbf532rrHk_k0v9BjQhq9JkHX9lks=

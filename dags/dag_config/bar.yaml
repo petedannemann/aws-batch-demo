@@ -1,0 +1,5 @@
+input_file_path: s3://aws-batch-example/bar.txt.gz
+decompressed_file_path: s3://aws-batch-example/bar_decompressed.txt
+output_file_path: s3://aws-batch-example/bar.txt
+schedule_interval: false
+encryption_key: bCwIvy5ltS2UXWhj7dHPVnbO7UsbZHF8HgUo2Boy-Mg=
