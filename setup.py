@@ -10,6 +10,7 @@ setup(
         'boto3==1.9.137',
         'botocore==1.12.137',
         'Click==7.0',
+        'smart-open==1.8.4'
     ],
     entry_points={
         'console_scripts': [

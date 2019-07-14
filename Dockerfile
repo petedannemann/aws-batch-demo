@@ -24,8 +24,7 @@ RUN set -ex \
     && locale-gen \
     && useradd -ms /bin/bash worker \
     && python3 -m pip install -U pip \
-    && pip3 install -U setuptools \
-    && pip3 install retrying
+    && pip3 install -U setuptools
 
 COPY decompress /decompress
 COPY setup.py /setup.py

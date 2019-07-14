@@ -61,4 +61,7 @@ make tag
 
 # Build, tag, and push docker image to ECR
 make push
+
+# Submit the job to AWS Batch
+make submit-job
 ```
