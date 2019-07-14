@@ -3,10 +3,10 @@ AWS_ASSETS_NAME=aws-batch-example
 AWS_ACCOUNT_NUMBER=301408662608
 
 copy-s3:
-	aws s3 cp assets/lorem_ipsum.txt.gz s3://${AWS_ASSETS_NAME}
+	aws s3 cp assets s3://${AWS_ASSETS_NAME} --recursive
 
 build:
-	docker build -t ${AWS_ASSETS_NAME} .
+	docker build -t ${AWS_ASSETS_NAME} -f Dockerfile.worker .
 
 tag:
 	docker tag ${AWS_ASSETS_NAME}:latest ${AWS_ACCOUNT_NUMBER}.dkr.ecr.us-east-1.amazonaws.com/${AWS_ASSETS_NAME}:latest

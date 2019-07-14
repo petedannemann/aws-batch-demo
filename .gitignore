@@ -4,3 +4,4 @@ terraform.tfstate
 .terraform/
 terraform.tfstate
 terraform.tfstate.backup
+*.egg-info/

@@ -1,6 +1,6 @@
 # AWS Batch Demo
 
-This provisions an AWS Batch Compute Environment and Job Definition and runs a simple decompress command line tool written in Python in an AWS Batch Job.
+This provisions an AWS Batch Compute Environment and Job Definition and runs a simple decompress and decrypt command line tool written in Python in an AWS Batch Job. Airflow has two simple dags that runs this process for two files.
 
 ## Requirements
 
@@ -17,8 +17,21 @@ $ pip install git+https://github.com/petedannemann/aws-secrets-manager-cli#egg=a
 ## Python CLI Usage
 
 ```bash
-$ decompress --help
-Usage: decompress [OPTIONS]
+$ decompress-decrypt --help
+Usage: decompress-decrypt [OPTIONS] COMMAND [ARGS]...
+
+  Comand line tool to decompress and decrypt files.
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  decompress  Simple program that decompresses an input file and writes it...
+  decrypt     Simple program that decrypts an input file and writes it to
+              an...
+
+$ decompress-decrypt decompress --help
+Usage: decompress-decrypt decompress [OPTIONS]
 
   Simple program that decompresses an input file and writes it to an output
   file.
@@ -28,6 +41,20 @@ Options:
                                (s3://...)
   -o, --output-file-path TEXT  The path of the output file, local or S3
                                (s3://...)
+  --help                       Show this message and exit.
+
+$ decompress-decrypt decrypt --help
+Usage: decompress-decrypt decrypt [OPTIONS]
+
+  Simple program that decrypts an input file and writes it to an output
+  file.
+
+Options:
+  -i, --input-file-path TEXT   The path of the input file, local or S3
+                               (s3://...)
+  -o, --output-file-path TEXT  The path of the output file, local or S3
+                               (s3://...)
+  -f, --fernet-key TEXT        The decrpytion key.
   --help                       Show this message and exit.
 ```
 
@@ -64,4 +91,7 @@ make push
 
 # Submit the job to AWS Batch
 make submit-job
+
+# Launch airflow
+docker-compose up
 ```
